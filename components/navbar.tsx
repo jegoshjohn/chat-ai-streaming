@@ -14,9 +14,6 @@ export const Navbar = () => {
               <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 ChatDeePT
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400 hidden sm:inline">
-                • Wisdom from the Digital Deepak
-              </span>
             </Link>
           </div>
           <div className="flex items-center gap-4">
