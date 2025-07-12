@@ -1,141 +1,37 @@
-# Environment files (contain sensitive data)
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Vercel Ignore File
 
-# Development tools
-.git
-.gitignore
-README.md
-.eslintrc.json
-
-# IDE files
-.vscode
-.idea
-*.swp
-*.swo
-
-# OS files
+# General
 .DS_Store
-Thumbs.db
-
-# Logs
 *.log
+.env
+.env.local
+.env.*.local
+.cache
+
+# Node.js
+node_modules
+.next
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Test files
-**/*.test.*
-**/*.spec.*
-__tests__
-test
-tests
-
-# Documentation
-docs
-*.md
-
-# Python cache
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
-*.so
-
-# Python virtual environments
+build/
+dist/
 venv/
+.venv/
 env/
-ENV/
+*.egg-info/
 
-# Python development files
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.nox/
+# IDEs & Tooling
+.vscode/
+.idea/
+.git/
 
-# Exclude all Python packages that are installed in the root directory
-# These are dependencies that should be installed by Vercel, not deployed
-fastapi/
-fastapi-*.dist-info/
-uvicorn/
-uvicorn-*.dist-info/
-openai/
-openai-*.dist-info/
-python-dotenv-*.dist-info/
-dotenv/
-httpx/
-httpx-*.dist-info/
-pydantic/
-pydantic-*.dist-info/
-pydantic_core/
-pydantic_core-*.dist-info/
-starlette/
-starlette-*.dist-info/
-anyio/
-anyio-*.dist-info/
-sniffio/
-sniffio-*.dist-info/
-click/
-click-*.dist-info/
-typer/
-typer-*.dist-info/
-rich/
-rich-*.dist-info/
-rich_toolkit/
-rich_toolkit-*.dist-info/
-watchfiles/
-watchfiles-*.dist-info/
-certifi/
-certifi-*.dist-info/
-idna/
-idna-*.dist-info/
-h11/
-h11-*.dist-info/
-httptools/
-httptools-*.dist-info/
-httpcore/
-httpcore-*.dist-info/
-jinja2/
-jinja2-*.dist-info/
-markupsafe/
-MarkupSafe-*.dist-info/
-markdown_it/
-markdown_it_py-*.dist-info/
-mdurl/
-mdurl-*.dist-info/
-pygments/
-pygments-*.dist-info/
-multipart/
-python_multipart/
-python_multipart-*.dist-info/
-yaml/
-PyYAML-*.dist-info/
-_yaml/
-annotated_types/
-annotated_types-*.dist-info/
-distro/
-distro-*.dist-info/
-email_validator/
-email_validator-*.dist-info/
-dns/
-dnspython-*.dist-info/
-websockets/
-websockets-*.dist-info/
-uvloop/
-uvloop-*.dist-info/
-werkzeug/
-Werkzeug-*.dist-info/
-shellingham/
-shellingham-*.dist-info/
-tqdm/
-tqdm-*.dist-info/
-typing_extensions.py
-typing_extensions-*.dist-info/
-bin/
-
-# Keep only the essential API files
-# api/index.py and api/utils/ should be included 
+# Documentation
+README.md
