@@ -1,31 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    outputFileTracingRoot: process.cwd(),
-
-    // ✅ Works in Next 13.4–14
-    outputFileTracingExcludes: {
-      '*': [
-        '**/.pnpm/**',               // ← NEW: ignore the real pnpm store
-        'node_modules/@swc/core-linux-x64-gnu',
-        'node_modules/@swc/core-linux-x64-musl',
-        'node_modules/@esbuild/linux-x64',
-        'node_modules/sharp',
-        'node_modules/oniguruma',
-        'node_modules/fsevents',
-        'node_modules/@next/swc-*',  // all the other binaries you listed
-      ],
-    },
-  },
-
-  swcMinify: true,
-  compress: true,
-  images: {
-    formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60,
-  },
-
-  // API routes configuration
   rewrites: async () => {
     return [
       {
