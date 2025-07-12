@@ -1,7 +1,10 @@
 {
   "functions": {
     "api/**": {
-      "excludeFiles": "{.next,.git,node_modules}/**"
+      "excludeFiles": "{.next,.git,node_modules,public,app,components,hooks,lib,assets}/**"
     }
-  }
+  },
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm ci --only=production"
 }

@@ -1,14 +1,12 @@
 # ChatDPT
 
-A hello world app for prompt engineering that lets users have conversations with an AI persona of Deepak Chopra. Built with Next.js frontend and Python FastAPI backend for streaming chat completions.
+A prompt engineering hello world project demonstrating how to build a conversational AI with a custom persona. 
+This example builds a custom persona that embodies Deepak Chopra's signature woo-woo "spiritual wisdom".
 
-## Features
+## Key Features
 
-- Real-time streaming chat interface
-- AI persona of Deepak Chopra with spiritual wisdom responses
-- Markdown rendering for formatted responses
-- File attachment support
-- Responsive design with modern UI
+- Real-time streaming chat completions with OpenAI API
+- Custom persona implementation through prompt engineering
 
 ## Tech Stack
 
@@ -30,4 +28,4 @@ cp .env.example .env
 pnpm dev
 ```
 
-Visit `http://localhost:3000` to start chatting with Deepak Chopra.
+Visit `http://localhost:3000` to see the persona in action and examine the prompt engineering implementation.
