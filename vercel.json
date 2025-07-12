@@ -1,38 +1,10 @@
 {
-  "builds": [
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python3.12",
-      "config": {
-        "excludeFiles": [
-          "app/**",
-          "assets/**",
-          "components/**",
-          "hooks/**",
-          "lib/**",
-          "public/**",
-          "node_modules/**",
-          ".next/**",
-          "next.config.js",
-          "postcss.config.js",
-          "tailwind.config.js",
-          "tsconfig.json",
-          "components.json",
-          "package.json",
-          "pnpm-lock.yaml",
-          "README.md"
-        ]
-      }
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    }
-  ]
+  "functions": {
+    "api/**": {
+      "excludeFiles": "{.next,*.cache,node_modules,public,app}/**"
+    }, 
+    "api/*/**": {
+      "excludeFiles": "{.next,*.cache,node_modules,public,app}/**"
+    } 
+  }
 }
