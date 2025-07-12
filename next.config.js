@@ -1,27 +1,30 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    // Only copy files the server chunk actually needs
-    outputFileTracing: 'strict',
-    // Anything that matches one of these globs is left out
-    outputFileTracingIgnores: [
-      '**/.pnpm/**',                       // real packages (pnpm store)
-      '**/node_modules/**',                // symlink layer (still follow-links)
-      '**/*.map',                          // source maps
-      'node_modules/@swc/**',              // big native binaries you excluded
-      'node_modules/sharp/**',
-      'node_modules/oniguruma/**',
-      'node_modules/fsevents/**',
-    ],
+    outputFileTracingRoot: process.cwd(),
+
+    // ✅ Works in Next 13.4–14
+    outputFileTracingExcludes: {
+      '*': [
+        '**/.pnpm/**',               // ← NEW: ignore the real pnpm store
+        'node_modules/@swc/core-linux-x64-gnu',
+        'node_modules/@swc/core-linux-x64-musl',
+        'node_modules/@esbuild/linux-x64',
+        'node_modules/sharp',
+        'node_modules/oniguruma',
+        'node_modules/fsevents',
+        'node_modules/@next/swc-*',  // all the other binaries you listed
+      ],
+    },
   },
-  // Reduce bundle size
+
   swcMinify: true,
   compress: true,
-  // Optimize images
   images: {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
   },
+
   // API routes configuration
   rewrites: async () => {
     return [

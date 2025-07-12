@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/**": {
+    "api/**/*.py": {
       "excludeFiles": "{.pnpm,node_modules,.next,app,components,public}/**"
     }
   }
