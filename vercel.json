@@ -1,9 +1,28 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "builds": [
     {
       "src": "api/index.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "excludeFiles": [
+          "app/**",
+          "assets/**",
+          "components/**",
+          "hooks/**",
+          "lib/**",
+          "public/**",
+          "node_modules/**",
+          ".next/**",
+          "next.config.js",
+          "postcss.config.js",
+          "tailwind.config.js",
+          "tsconfig.json",
+          "components.json",
+          "package.json",
+          "pnpm-lock.yaml",
+          "README.md"
+        ]
+      }
     },
     {
       "src": "package.json",
@@ -13,7 +32,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index"
+      "destination": "/api/index.py"
     }
   ]
 }
