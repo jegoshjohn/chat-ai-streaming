@@ -2,9 +2,6 @@
   "functions": {
     "api/**": {
       "excludeFiles": "{.next,*.cache,node_modules,public,app}/**"
-    }, 
-    "api/*/**": {
-      "excludeFiles": "{.next,*.cache,node_modules,public,app}/**"
-    } 
+    }
   }
 }
