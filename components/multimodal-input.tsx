@@ -1,7 +1,6 @@
 "use client";
 
 import type { ChatRequestOptions, CreateMessage, Message } from "ai";
-import { motion } from "framer-motion";
 import type React from "react";
 import {
   useRef,
@@ -19,9 +18,7 @@ import { ArrowUpIcon, StopIcon } from "./icons";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 
-const suggestedActions = [
-  // ... remove this entire array
-];
+
 
 export function MultimodalInput({
   chatId,
