@@ -4,7 +4,6 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 from pydantic import BaseModel
 import base64
 from typing import List, Optional, Any
-from .attachment import ClientAttachment
 
 class ToolInvocationState(str, Enum):
     CALL = 'call'
@@ -22,7 +21,6 @@ class ToolInvocation(BaseModel):
 class ClientMessage(BaseModel):
     role: str
     content: str
-    experimental_attachments: Optional[List[ClientAttachment]] = None
     toolInvocations: Optional[List[ToolInvocation]] = None
 
 def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatCompletionMessageParam]:
@@ -36,22 +34,6 @@ def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatComple
             'type': 'text',
             'text': message.content
         })
-
-        if (message.experimental_attachments):
-            for attachment in message.experimental_attachments:
-                if (attachment.contentType.startswith('image')):
-                    parts.append({
-                        'type': 'image_url',
-                        'image_url': {
-                            'url': attachment.url
-                        }
-                    })
-
-                elif (attachment.contentType.startswith('text')):
-                    parts.append({
-                        'type': 'text',
-                        'text': attachment.url
-                    })
 
         if(message.toolInvocations):
             for toolInvocation in message.toolInvocations:
