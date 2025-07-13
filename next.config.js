@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   rewrites: async () => {
     return [
       {
@@ -7,21 +8,21 @@ const nextConfig = {
         destination:
           process.env.NODE_ENV === "development"
             ? "http://127.0.0.1:8000/api/:path*"
-            : "/api/",
+            : "http://backend:8000/api/:path*",
       },
       {
         source: "/docs",
         destination:
           process.env.NODE_ENV === "development"
             ? "http://127.0.0.1:8000/docs"
-            : "/api/docs",
+            : "http://backend:8000/docs",
       },
       {
         source: "/openapi.json",
         destination:
           process.env.NODE_ENV === "development"
             ? "http://127.0.0.1:8000/openapi.json"
-            : "/api/openapi.json",
+            : "http://backend:8000/openapi.json",
       },
     ];
   },
