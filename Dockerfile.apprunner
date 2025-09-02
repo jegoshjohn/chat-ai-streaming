@@ -1,0 +1,49 @@
+# Multi-service Dockerfile for AWS App Runner
+# Explicitly target x86_64 architecture for AWS compatibility
+FROM --platform=linux/amd64 node:18-slim AS frontend-deps
+# Force x86_64 architecture
+RUN dpkg --print-architecture
+RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY package.json pnpm-lock.yaml* ./
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
+
+FROM --platform=linux/amd64 node:18-slim AS frontend-builder
+# Force x86_64 architecture
+RUN dpkg --print-architecture
+WORKDIR /app
+COPY --from=frontend-deps /app/node_modules ./node_modules
+COPY . .
+ENV NEXT_TELEMETRY_DISABLED 1
+RUN npm run build
+
+FROM --platform=linux/amd64 node:18-slim AS final
+# Force x86_64 architecture
+RUN dpkg --print-architecture
+# Install Python and system dependencies
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv curl && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+
+# Copy Python requirements and install
+COPY requirements.txt .
+RUN python3 -m venv /opt/venv && \
+    /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Copy FastAPI backend
+COPY api/ ./api/
+
+# Copy built Next.js frontend
+COPY --from=frontend-builder /app/.next/standalone ./
+COPY --from=frontend-builder /app/.next/static ./.next/static
+COPY --from=frontend-builder /app/public ./public
+
+# Create a startup script
+RUN echo '#!/bin/bash\nuvicorn api.index:app --host 0.0.0.0 --port 8000 &\nnode server.js' > /app/start.sh && chmod +x /app/start.sh
+
+EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Use the startup script
+CMD ["/app/start.sh"]
